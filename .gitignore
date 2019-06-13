@@ -102,3 +102,10 @@ venv.bak/
 
 # mypy
 .mypy_cache/
+
+
+.idea
+*.iml
+
+wxpy.pkl
+wxpy_puid.pkl
