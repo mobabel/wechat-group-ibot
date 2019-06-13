@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <style>
+        h1 {
+            text-align: center;
+        }
+        h2 {
+            text-align: center;
+            margin-top: 20px;
+        }
+        img {
+            display: block;
+            margin: 0 auto;
+        }
+        .divider_mini {
+            display: block;
+            height: 50px;
+        }
+        .divider_s {
+            display: block;
+            height: 100px;
+        }
+        .divider_b {
+            display: block;
+            height: 300px;
+        }
+    </style>
+</head>
+<body>
+
+<h1>{{group_name}} 聊天数据分析</h1>
+<h2>{{date_begin}} - {{date_end}}</h2>
+
+<h2>24小时内聊天频率</h2>
+<img src="{{img_chat_freq_day}}" style="width:100%;"/>
+
+<h2>消息类型</h2>
+<img src="{{img_chat_msg_type}}" style="width:80%;"/>
+
+<h2>日均聊天数量</h2>
+<img src="{{img_chat_count_day}}" style="width:100%;"/>
+
+<h2>群友活跃时间热点图</h2>
+<img src="{{img_chat_heating_act}}" style="width:100%;"/>
+
+<div class="divider_b"></div>
+
+<h2>聊天话题云图</h2>
+<img src="{{img_chat_history}}" style="width:100%;"/>
+
+<div class="divider_b"></div>
+<div class="divider_b"></div>
+
+<h1>群友资料分析</h1>
+
+<h2>性别占比</h2>
+<img src="{{img_member_gender_pie}}" style="width:70%;"/>
+
+<h2>在职占比</h2>
+<img src="{{img_member_occupation_pie}}" style="width:70%;"/>
+
+<div class="divider_s"></div>
+<div class="divider_s"></div>
+
+<h2>所有群友工作领域</h2>
+<img src="{{img_member_branches_all}}" style="width:70%;"/>
+
+<h2>程序猿&程序媛工作领域</h2>
+<table style="width:100%;border: 0px">
+    <thead>
+        <tr>
+            <th scope="col">程序猿</th>
+            <th scope="col">程序媛</th>
+        </tr>
+    </thead>
+    <tr>
+        <td width="50%"><img src="{{img_member_branches_male}}" style="width:100%;"/></td>
+        <td width="50%"><img src="{{img_member_branches_female}}" style="width:100%;"/></td>
+    </tr>
+</table>
+
+<div class="divider_mini"></div>
+
+<h2 style="margin-top: 0px;">所有群友开发语言和框架</h2>
+<img src="{{img_member_language_all}}" style="width:70%;"/>
+
+<h2>程序猿&程序媛开发语言和框架</h2>
+<table style="width:100%;border: 0px">
+    <thead>
+    <tr>
+        <th scope="col">程序猿</th>
+        <th scope="col">程序媛</th>
+    </tr>
+    </thead>
+    <tr>
+        <td width="50%"><img src="{{img_member_language_male}}" style="width:100%;"/></td>
+        <td width="50%"><img src="{{img_member_language_female}}" style="width:100%;"/></td>
+    </tr>
+</table>
+
+<div class="divider_mini"></div>
+
+<h2>职场&学生开发语言和框架</h2>
+<table style="width:100%;border: 0px">
+    <thead>
+    <tr>
+        <th scope="col">职场</th>
+        <th scope="col">学生</th>
+    </tr>
+    </thead>
+    <tr>
+        <td width="50%"><img src="{{img_member_language_employee}}" style="width:100%;"/></td>
+        <td width="50%"><img src="{{img_member_language_student}}" style="width:100%;"/></td>
+    </tr>
+</table>
+
+</body>
+</html>

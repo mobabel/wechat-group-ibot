@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <style>
+        h1 {
+            text-align: center;
+        }
+        h2 {
+            text-align: center;
+            margin-top: 20px;
+        }
+        img {
+            display: block;
+            margin: 0 auto;
+        }
+        .divider_mini {
+            display: block;
+            height: 50px;
+        }
+        .divider_s {
+            display: block;
+            height: 100px;
+        }
+        .divider_b {
+            display: block;
+            height: 300px;
+        }
+    </style>
+</head>
+<body>
+
+<h1>{{group_name}} Chat History Analysis</h1>
+<h2>{{date_begin}} - {{date_end}}</h2>
+
+<h2>Chat frequency in 24 hours</h2>
+<img src="{{img_chat_freq_day}}" style="width:100%;"/>
+
+<h2>Message Type</h2>
+<img src="{{img_chat_msg_type}}" style="width:80%;"/>
+
+<h2>Chat Frequency</h2>
+<img src="{{img_chat_count_day}}" style="width:100%;"/>
+
+<h2>Member Activity Heat Map</h2>
+<img src="{{img_chat_heating_act}}" style="width:100%;"/>
+
+<div class="divider_b"></div>
+
+<h2>Chat History Word Cloud</h2>
+<img src="{{img_chat_history}}" style="width:100%;"/>
+
+<div class="divider_b"></div>
+<div class="divider_b"></div>
+
+<h1>Member Profile Analysis</h1>
+
+<h2>Member Gender</h2>
+<img src="{{img_member_gender_pie}}" style="width:70%;"/>
+
+<h2>Member Occupation</h2>
+<img src="{{img_member_occupation_pie}}" style="width:70%;"/>
+
+<div class="divider_s"></div>
+<div class="divider_s"></div>
+
+<h2>Branches which all members are working in</h2>
+<img src="{{img_member_branches_all}}" style="width:75%;"/>
+
+<h2>Branches which male&female members are working in</h2>
+<table style="width:100%;border: 0px">
+    <thead>
+    <tr>
+        <th scope="col">Male members</th>
+        <th scope="col">Female members</th>
+    </tr>
+    </thead>
+    <tr>
+        <td width="50%"><img src="{{img_member_branches_male}}" style="width:100%;"/></td>
+        <td width="50%"><img src="{{img_member_branches_female}}" style="width:100%;"/></td>
+    </tr>
+</table>
+
+<div class="divider_mini"></div>
+
+<h2 style="margin-top: 0px;">Languages&Framework which all members are working with</h2>
+<img src="{{img_member_language_all}}" style="width:75%;"/>
+
+<h2>Languages&Framework which male&female members are working with</h2>
+<table style="width:100%;border: 0px">
+    <thead>
+    <tr>
+        <th scope="col">Male members</th>
+        <th scope="col">Female members</th>
+    </tr>
+    </thead>
+    <tr>
+        <td width="50%"><img src="{{img_member_language_male}}" style="width:100%;"/></td>
+        <td width="50%"><img src="{{img_member_language_female}}" style="width:100%;"/></td>
+    </tr>
+</table>
+
+<div class="divider_mini"></div>
+
+<h2>Languages&Framework which Employee&Student members are working with</h2>
+<table style="width:100%;border: 0px">
+    <thead>
+    <tr>
+        <th scope="col">Employee</th>
+        <th scope="col">Student</th>
+    </tr>
+    </thead>
+    <tr>
+        <td width="50%"><img src="{{img_member_language_employee}}" style="width:100%;"/></td>
+        <td width="50%"><img src="{{img_member_language_student}}" style="width:100%;"/></td>
+    </tr>
+</table>
+
+</body>
+</html>
