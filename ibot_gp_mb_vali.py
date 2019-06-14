@@ -66,7 +66,7 @@ def check_nickname(nickname):
     if nickname == 'CE助手':
         return True
     # re.sub('  ', ' ', nickname, flags=re.IGNORECASE)
-    if re.match(r'([\u4e00-\u9fa5]|[ -~]|[\s\S])+\|([\u4e00-\u9fa5]|[ -~])+\|([\u4e00-\u9fa5]|[ -~])+', nickname):
+    if re.match(r'([\u4e00-\u9fa5]|[ -~]|[\s\S])+\|([\u4e00-\u9fa5]|[ -~]|[\s\S])+\|([\u4e00-\u9fa5]|[ -~])+', nickname):
         return True
     else:
         return False
