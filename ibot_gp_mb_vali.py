@@ -143,8 +143,7 @@ def kick_out_by_nickname(group, nickname, wx_puid):
         removed_name = res[0].remove()
         print('kick out member: ' + removed_name)
         send_message_in_group(group, kickout_final_text.format(str(kick_max),
-                              get_at_nickname_with_space(nickname)),
-                              space_after_chat_at)
+                              get_at_nickname_with_space(nickname), space_after_chat_at))
 
 
 def send_checked_name_warning_in_group(group, at_member):
