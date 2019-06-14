@@ -14,9 +14,9 @@ CREATE TABLE `wx_chat_group` (
 ENGINE = InnoDB
 DEFAULT CHARSET = utf8mb4 COLLATE utf8mb4_unicode_ci;
 
-INSERT INTO `wx_chat_group` (`id`, `name`) VALUES (1, '职业信息分享群| IT |德国');
-INSERT INTO `wx_chat_group` (`id`, `name`) VALUES (3, '德国I(•ૢ⚈͒⌄⚈͒•ૢ)T交流群');
-INSERT INTO `wx_chat_group` (`id`, `name`) VALUES (5, 'DAX群');
+INSERT INTO `wx_chat_group` (`id`, `name`) VALUES (1, 'IT群1');
+INSERT INTO `wx_chat_group` (`id`, `name`) VALUES (3, 'IT群2');
+INSERT INTO `wx_chat_group` (`id`, `name`) VALUES (5, 'IT群3');
 
 DROP TABLE IF EXISTS `wx_chat_history`;
 CREATE TABLE `wx_chat_history` (
