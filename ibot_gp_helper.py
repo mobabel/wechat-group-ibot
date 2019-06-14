@@ -29,23 +29,28 @@ def save_message(msg, group_id):
         message = msg.text
         # tulingreply.tuling_auto_reply(msg)
 
+    if msg.type == NOTE:
+        message = msg.text
+
     elif msg.type == SHARING:
+        # public account pushed articles
         art_list = msg.articles
         for item in art_list:
             print(item.url + ' ' + item.title + ' ' + item.summary)
             message = item.url + '||' + item.title + '||' + item.summary
+        # shared link
+        if not message:
+            message = msg.url
 
     elif msg.type in [RECORDING, PICTURE, ATTACHMENT, VIDEO]:
         ct_yyyy = msg.create_time.strftime('%Y')
         ct_md = msg.create_time.strftime('%m-%d')
-        path_file = os.path.join(get_path_for_file(path_attachment, ct_yyyy, ct_md), msg.file_name)
+        path_file = os.path.join(get_path_for_file(get_path_custom('attachment'), ct_yyyy, ct_md), msg.file_name)
         msg.get_file(path_file)
         message = path_file
-        # ct = msg.create_time.strftime('%Y-%m-%d-%H-%M-%S')
-        # if msg.type == PICTURE:
-        #   msg.get_file('%s.jpg' % ct)
-        # elif msg.type == VIDEO:
-        #   msg.get_file('%s.mp4' % ct)
+
+    elif msg.type == MAP:
+        message = msg.location
 
     insert_chat_history(group_id, msg.type, wx_puid, gp_user_name, member_name, '', message)
 
@@ -75,9 +80,6 @@ def start_schedule_for_analyzing():
 # read configuration
 debug = False
 day = time.strftime("%Y-%m-%d")
-
-# init file handler
-path_attachment = get_path_custom('attachment')
 
 # init database instance
 bot_db = BotDatabase.instance(db_config)

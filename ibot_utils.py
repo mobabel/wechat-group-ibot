@@ -41,6 +41,7 @@ def get_path_custom(name):
 def get_path_for_file(path, *paths):
     path_result = os.path.join(path, *paths)
     pathlib.Path(path_result).mkdir(parents=True, exist_ok=True)
+    return path_result
 
 
 def mk_datetime(date_string, str_format="%Y-%m-%d %H:%M:%S"):
