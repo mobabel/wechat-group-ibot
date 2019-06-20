@@ -83,6 +83,11 @@ bot = Bot(cache_path=True, console_qr=-2)
     - validate the nick names of member following the Group Naming Specification:
         `nickname|branch&direction|language&framework`
     - Start scheduler to kick out member after noticing > N times
+    
+![Demo 1](https://raw.githubusercontent.com/mobabel/wechat-group-ibot/master/wiki/member_welcome.jpg "Welcome member notification")
+![Demo 1](https://raw.githubusercontent.com/mobabel/wechat-group-ibot/master/wiki/member_validate.jpg "Validate member notification")
+
+
 
 - ibot_gp_helper.py
 
@@ -92,10 +97,20 @@ bot = Bot(cache_path=True, console_qr=-2)
 > Charts
 
 * Chat history Wordcloud
+![Demo 1](https://raw.githubusercontent.com/mobabel/wechat-group-ibot/master/wiki/chat_word_cloud.png "Chat history Wordcloud")
+* Member branch&skill Wordcloud
+![Demo 1](https://raw.githubusercontent.com/mobabel/wechat-group-ibot/master/wiki/member_branch_skill_gender.png "Member branch&skill Wordcloud")
+* Member gender pie chart
+![Demo 1](https://raw.githubusercontent.com/mobabel/wechat-group-ibot/master/wiki/member_gender_pie.png "Member gender pie chart")
 * Member week activity heatmap
+![Demo 1](https://raw.githubusercontent.com/mobabel/wechat-group-ibot/master/wiki/activity_heatmap.png "Member week activity heatmap")
 * Chat frequency dialy bar plot
+![Demo 1](https://raw.githubusercontent.com/mobabel/wechat-group-ibot/master/wiki/chat_freq_day_bar.jpg "Chat frequency dialy bar plot")
 * Chat count dialy bar plot
+![Demo 1](https://raw.githubusercontent.com/mobabel/wechat-group-ibot/master/wiki/chat_count_day_spot.png "Chat count dialy bar plot")
 * Chat message type monthly
+![Demo 1](https://raw.githubusercontent.com/mobabel/wechat-group-ibot/master/wiki/chat_msg_type_bar.jpg "Chat message type monthly")
+
     
     
 
