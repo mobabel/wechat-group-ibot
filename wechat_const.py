@@ -10,7 +10,7 @@ kickout_final_text = '''
 '''
 
 kickout_last_warning_text = '''
-@{}{} 你还有最后一次机会更改群昵称，下次将无警告直接踢出群。 \n\n更多细节请看群公告
+{}{} 你还有最后一次机会更改群昵称，下次将无警告直接踢出群。 \n\n更多细节请看群公告
 '''
 
 kickout_notice_text = '''

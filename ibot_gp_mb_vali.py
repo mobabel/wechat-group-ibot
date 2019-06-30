@@ -112,11 +112,11 @@ def process_group_members(group):
         # warn_left = kick_max - 1 - checked_count
 
         # if exceeds maximum notice, kick out member
-        if checked_count >= kick_max:
+        if checked_count + 1 >= kick_max:
             kick_out_by_nickname(group_id, nickname, wx_puid)
             remove_invalid_name(group_id, wx_puid)
         # if has last chance, warn member
-        elif checked_count == kick_max - 1:
+        elif checked_count + 1 == kick_max - 1:
             send_checked_name_warning_in_group(group, nickname)
             insert_invalid_name(group_id, wx_puid, nickname)
             at_members += '%s[%s]\n' % (get_at_nickname_with_space(nickname), str(checked_count + 1))
