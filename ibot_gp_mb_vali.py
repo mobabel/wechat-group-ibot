@@ -113,7 +113,7 @@ def process_group_members(group):
 
         # if exceeds maximum notice, kick out member
         if checked_count + 1 >= kick_max:
-            kick_out_by_nickname(group_id, nickname, wx_puid)
+            kick_out_by_nickname(group, nickname, wx_puid)
             remove_invalid_name(group_id, wx_puid)
         # if has last chance, warn member
         elif checked_count + 1 == kick_max - 1:
