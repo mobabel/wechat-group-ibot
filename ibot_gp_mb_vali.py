@@ -4,6 +4,7 @@ import codecs
 import random
 import re
 from apscheduler.schedulers.blocking import BlockingScheduler
+import wxpy
 
 # local python lib
 from wechat_const import *
@@ -113,8 +114,8 @@ def process_group_members(group):
 
         # if exceeds maximum notice, kick out member
         if checked_count + 1 >= kick_max:
-            kick_out_by_nickname(group, nickname, wx_puid)
-            remove_invalid_name(group_id, wx_puid)
+            if kick_out_by_nickname(group, nickname, wx_puid):
+                remove_invalid_name(group_id, wx_puid)
         # if has last chance, warn member
         elif checked_count + 1 == kick_max - 1:
             send_checked_name_warning_in_group(group, nickname)
@@ -140,10 +141,18 @@ def kick_out_by_nickname(group, nickname, wx_puid):
     matched_members = group.members.search(nickname)
     res = list(filter(lambda m: m.puid == wx_puid, matched_members))
     if len(res) > 0:
-        removed_name = res[0].remove()
-        print('kick out member: ' + removed_name)
-        send_message_in_group(group, kickout_final_text.format(str(kick_max),
-                              get_at_nickname_with_space(nickname), space_after_chat_at))
+        print('Go to kick out member: ' + nickname)
+        try:
+            removed_name = res[0].remove()
+            print('kicked out member: ' + removed_name)
+            send_message_in_group(group, kickout_final_text.format(str(kick_max),
+                                                                   get_at_nickname_with_space(nickname),
+                                                                   space_after_chat_at))
+            return True
+        except wxpy.exceptions.ResponseError:
+            bot.file_helper.send('Failed to kick out member: ' + removed_name)
+            pass
+    return False
 
 
 def send_checked_name_warning_in_group(group, at_member):
