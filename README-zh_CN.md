@@ -1,17 +1,17 @@
 # wechat Group iBot
 
-## Feature
+## 功能
 
-* Scheduled to check member's nickname in group, if it is invalid, send message to them.
-* Export chat history in group and save into database.
-* Analyse group members' branches,  developing languages and chat statistic as well
-* Generate statistic report
+* 定时检查群员昵称，如果不符标准，发送提醒信息
+* 存储群聊天记录并且录入数据库
+* 分析群成员昵称和历史聊天记录，制作各类图表
+* 生成数据分析报告
 
-## 1 Environment and Dependency
+## 1 环境和依赖
 
-Script is compatible with Python 3.
+脚本兼容于Python 3
 
-> Install libraries
+> 安装各类库
 
     pip3 install wxpy
     pip3 install apscheduler
@@ -26,7 +26,7 @@ Script is compatible with Python 3.
     pip3 install palettable
     pip3 install pdfkit
     
-> Install wkhtmltopdf
+> 安装 wkhtmltopdf
   
 - Debian/Ubuntu:
 ~~~~
@@ -43,31 +43,31 @@ sudo yum install wkhtmltopdf
 brew install Caskroom/cask/wkhtmltopdf
 ~~~~
     
-> Configure IDEA/PyCharm Output Encoding 
+> 设置IDEA/PyCharm日志输出编码
 
-    On the Help menu, click Edit Custom VM Options.
+    打开 Help 菜单, 点击 Edit Custom VM Options.
  
-    Add -Dconsole.encoding=UTF-8
+    添加 -Dconsole.encoding=UTF-8
  
-    Restart IDEA or PyCharm.
+    重启 IDEA 或 PyCharm.
 
-> Add the watched groups as Group Chat Contact in WeChat App
+> 在微信App里将所管理的群添加为群聊联系人
     
-    This will help bot to find the group depends on its name quickly
+    这会加速群助手根据群名快速找到群
     
-### Prepare database
+### 数据库准备
 
-Only mysql is supported currently, and the sql script locates in ./sql/db_mysql.sql
+目前只支持mysql， sql脚本位于 ./sql/db_mysql.sql
 
-> Please change database, username, password as yours
+> 请在脚本中修改你自己的database, username, password
 
 
-## 2 Possible problems
+## 2 可能遇到的问题
 
-> Can not scan the generated barcode to login
+> 无法在命令行工具里扫描二维码登录
 
-* If the barcode has been transformed, try to use console_qr=1, 2 or other int to adjust barcode
-* If the background color of console is white, please change console_qr to minus value.
+* 如果二维码变形, 请用 console_qr=1, 2 或其他值调整二维码
+* 如果命令行工具是白色背景，请将console_qr设为负值
 
 ~~~~
 bot = Bot(cache_path=True, console_qr=True)
@@ -76,13 +76,13 @@ bot = Bot(cache_path=True, console_qr=-2)
 ~~~~
 
 
-## 3 How to develop
+## 3 如何开发
 
 - ibot_gp_mb_vali.py
 
-    - validate the nick names of member following the Group Naming Specification:
+    - 按如下标准验证群友昵称:
         `nickname|branch&direction|language&framework`
-    - Start scheduler to kick out member after noticing > N times
+    - 启动定时器，踢掉N次提醒后还坚持不改昵称的群友
     
 ![Demo 1](https://raw.githubusercontent.com/mobabel/wechat-group-ibot/master/wiki/member_welcome.jpg "Welcome member notification")
 ![Demo 1](https://raw.githubusercontent.com/mobabel/wechat-group-ibot/master/wiki/member_validate.jpg "Validate member notification")
@@ -91,76 +91,75 @@ bot = Bot(cache_path=True, console_qr=-2)
 
 - ibot_gp_helper.py
 
-    - group message listener
-    - scheduler for group chat analyzing and generating charts
+    - 监听群聊消息
+    - 启动定时器，生成数据分析图表
     
 > Charts
 
-* Chat history Wordcloud
+* 群聊记录云图
 ![Demo 1](https://raw.githubusercontent.com/mobabel/wechat-group-ibot/master/wiki/chat_word_cloud.png "Chat history Wordcloud")
-* Member branch&skill Wordcloud
+* 群员专业技术云图
 ![Demo 1](https://raw.githubusercontent.com/mobabel/wechat-group-ibot/master/wiki/member_branch_skill_gender.png "Member branch&skill Wordcloud")
-* Member gender pie chart
+* 群员性别构成饼图
 ![Demo 1](https://raw.githubusercontent.com/mobabel/wechat-group-ibot/master/wiki/member_gender_pie.png "Member gender pie chart")
-* Member week activity heatmap
+* 群员活跃热力图
 ![Demo 1](https://raw.githubusercontent.com/mobabel/wechat-group-ibot/master/wiki/activity_heatmap.png "Member week activity heatmap")
-* Chat frequency dialy bar plot
+* 群聊频率分析
 ![Demo 1](https://raw.githubusercontent.com/mobabel/wechat-group-ibot/master/wiki/chat_freq_day_bar.jpg "Chat frequency dialy bar plot")
-* Chat count dialy bar plot
+* 群聊日均分析
 ![Demo 1](https://raw.githubusercontent.com/mobabel/wechat-group-ibot/master/wiki/chat_count_day_spot.png "Chat count dialy bar plot")
-* Chat message type monthly
+* 消息种类分析
 ![Demo 1](https://raw.githubusercontent.com/mobabel/wechat-group-ibot/master/wiki/chat_msg_type_bar.jpg "Chat message type monthly")
 
     
     
 
-> Configuration
+> 设置
 
-Edit wechat.conf and modify variables.
+修改 wechat.conf 中的参数.
 
 
-> Make directory and grant permission for path_tmp, for example:
+> 创建临时缓存文件夹并给予读写权限:
 
     mkdir /opt/tmp/ && chmod 700 /opt/tmp/
 
 
-### Debug
+### 调试
 
-> Enable debug in each script to avoid disturbing group chat
+> 在每个脚本里启动debug模式，避免打扰群
 
     debug = True
     
     
-### Tuling robot
+### 图灵机器人
 
-> Tuling chat robot is deactivated currently, but you can activate it and implement more features.
+> 图灵聊天机器人默认关闭，你可以启动并开发更多功能
 
-    view tulingreply.py
+    查看 tulingreply.py
     
     # wechat.conf
-    tuling_api_key is required
+    tuling_api_key 需要填写
 
     
-## 4 How to use
+## 4 如何使用
 
 
-### Run executable py directly
+### 直接运行脚本
 
-> Run directly
+> 直接运行
 
     python3 ibot_gp_mb_vali.py
     python3 ibot_gp_helper.py
 
-> If you cannot login after barcode scan, try to delete the two files and try again.
+> 如果扫码后无法登陆，请删除下面两个文件后再次尝试.
 
     rm -rf wxpy.pkl    
     rm -rf wxpy_puid.pkl    
 
-### Run script in background
+### 在后台运行脚本
 
-Run the script with nohup which ignores the hangup signal. 
-This means that you can close the terminal without stopping the execution. 
-Also, don’t forget to add & so the script runs in the background:
+使用nohub启动脚本，就算关闭终端，也可以保持脚本在后台持续运行，
+首先给予权限:
 
     chmod +x ibot_gp_mb_vali.py
     chmod +x ibot_gp_helper.py
@@ -168,17 +167,17 @@ Also, don’t forget to add & so the script runs in the background:
     nohup python3 ibot_gp_mb_vali.py &
     nohup python3 ibot_gp_helper.py &
 
-The output will be saved in the nohup.out file, unless you specify the log file like here:
+日志将存在 nohup.out里, 也可以存在其它路径:
 
     nohup python3 ibot_gp_mb_vali.py > log_vali.log &
     nohup python3 ibot_gp_helper.py > log_helper.log &
 
 > Where is barcode?
 
-Logs will be outputed into log_vali.log, log_helper.log or nohup.out, as demand.
+本项目日志将存于 log_vali.log, log_helper.log 或 nohup.out
 
 
-> Terminate ibot.py in thread
+> 查找并且关闭后台ibot进程
     
     ps ax | grep ibot
     kill -7 process_id   
@@ -191,7 +190,7 @@ Logs will be outputed into log_vali.log, log_helper.log or nohup.out, as demand.
 * More analysis charts for chat
 
     
-## Links
+## 链接
 
 [wxpy Github](https://github.com/youfou/wxpy)
 
