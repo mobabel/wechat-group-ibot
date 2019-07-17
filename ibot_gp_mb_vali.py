@@ -150,7 +150,7 @@ def kick_out_by_nickname(group, nickname, wx_puid):
                                                                    space_after_chat_at))
             return True
         except wxpy.exceptions.ResponseError:
-            bot.file_helper.send('Failed to kick out member: ' + removed_name)
+            bot.file_helper.send('Failed to kick out member: ' + nickname)
             pass
     return False
 
