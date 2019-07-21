@@ -64,7 +64,7 @@ def check_nickname(nickname):
 
     nickname = format_readable_nickname(nickname)
     nickname = remove_emoji(nickname)
-    if nickname == 'CE助手':
+    if nickname == 'CE助手' or nickname == 'IT群助手':
         return True
     # re.sub('  ', ' ', nickname, flags=re.IGNORECASE)
     if re.match(r'([\u4e00-\u9fa5]|[ -~]|[\s\S])+\|([\u4e00-\u9fa5]|[ -~]|[\s\S])+\|([\u4e00-\u9fa5]|[ -~])+', nickname):
@@ -104,7 +104,8 @@ def process_group_members(group):
     # pickup random 5 members and send notice message
     # get non-duplicated elements
     random_members = random.sample(invalid_members, k=notice_random)
-    at_members = ''
+    at_members_notice = ''
+    at_members_warning = ''
     for in_member in random_members:
         nickname = in_member.nickname
         wx_puid = in_member.wx_puid
@@ -118,14 +119,15 @@ def process_group_members(group):
                 remove_invalid_name(group_id, wx_puid)
         # if has last chance, warn member
         elif checked_count + 1 == kick_max - 1:
-            send_checked_name_warning_in_group(group, nickname)
             insert_invalid_name(group_id, wx_puid, nickname)
-            at_members += '%s[%s]\n' % (get_at_nickname_with_space(nickname), str(checked_count + 1))
+            at_members_warning += '%s\n' % (get_at_nickname_with_space(nickname))
+            at_members_notice += '%s[%s]\n' % (get_at_nickname_with_space(nickname), str(checked_count + 1))
         else:
             insert_invalid_name(group_id, wx_puid, nickname)
-            at_members += '%s[%s]\n' % (get_at_nickname_with_space(nickname), str(checked_count + 1))
+            at_members_notice += '%s[%s]\n' % (get_at_nickname_with_space(nickname), str(checked_count + 1))
 
-    send_checked_name_notice_in_group(group, at_members, len(invalid_members))
+    send_checked_name_warning_in_group(group, at_members_warning)
+    send_checked_name_notice_in_group(group, at_members_notice, len(invalid_members))
 
     fp.close()
     return
@@ -143,11 +145,11 @@ def kick_out_by_nickname(group, nickname, wx_puid):
     if len(res) > 0:
         print('Go to kick out member: ' + nickname)
         try:
-            removed_name = res[0].remove()
-            print('kicked out member: ' + removed_name)
             send_message_in_group(group, kickout_final_text.format(str(kick_max),
                                                                    get_at_nickname_with_space(nickname),
                                                                    space_after_chat_at))
+            removed_name = res[0].remove()
+            print('kicked out member: ' + removed_name)
             return True
         except wxpy.exceptions.ResponseError:
             bot.file_helper.send('Failed to kick out member: ' + nickname)
@@ -155,9 +157,9 @@ def kick_out_by_nickname(group, nickname, wx_puid):
     return False
 
 
-def send_checked_name_warning_in_group(group, at_member):
-    send_message_in_group(group,  kickout_last_warning_text.format(get_at_nickname_with_space(at_member),
-                                                                   space_after_chat_at))
+def send_checked_name_warning_in_group(group, at_members):
+    if at_members.strip():
+        send_message_in_group(group, kickout_last_warning_text.format(at_members, space_after_chat_at))
 
 
 def send_checked_name_notice_in_group(group, at_members, invalid_number_count):
