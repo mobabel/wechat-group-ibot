@@ -180,7 +180,7 @@ def send_message_in_group(group, message):
 def start_schedule_for_checking_member(group):
     scheduler = BlockingScheduler()
     scheduler.add_job(lambda: process_group_members(group), 'cron', hour=8, minute=1, timezone="Europe/Paris")
-    scheduler.add_job(lambda: process_group_members(group), 'cron', hour=20, minute=1, timezone="Europe/Paris")
+    # scheduler.add_job(lambda: process_group_members(group), 'cron', hour=20, minute=1, timezone="Europe/Paris")
     # local test
     if debug:
         scheduler.add_job(lambda: process_group_members(group), 'cron', hour=16, minute=9)
