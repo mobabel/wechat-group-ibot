@@ -58,6 +58,7 @@ def check_nickname(nickname):
 
     nickname = nickname.replace('｜', '|')
     nickname = nickname.replace('丨', '|')
+    nickname = nickname.replace('∣', '|')
 
     nickname = nickname.replace(' | ', '|')
     nickname = nickname.replace('| ', '|')
