@@ -106,11 +106,15 @@ def auto_reply_assistant(msg):
     # If is from group but not @ mentioned, ignore
     if not (isinstance(msg.sender, Group) and not msg.is_at):
         message = msg.text.lower().strip()
-        if message in ('help', '帮助'):
+        message = message.replace('@IT群助手', '')
+        message = message.replace('@', '')
+        message = message.replace('IT群助手', '')
+        message = message.replace(' ', '')
+        if any(word in message for word in ('help', '帮助')):
             msg.reply(group_help_text)
-        if message in ('rules', 'rule', '群规'):
+        if any(word in message for word in ('rules', 'rule', '群规')):
             msg.reply(group_rule_text.format(str(kick_max)))
-        elif message in ('jobs', 'job', 'app', 'startup', '创业', '工作'):
+        elif any(word in message for word in ('jobs', 'job', 'app', 'startup', '创业', '工作')):
             msg.reply(group_miniapp_text)
             group_1.send_image('assets/it_jobs_miniapp_barcode.jpeg')
 
@@ -118,11 +122,11 @@ def auto_reply_assistant(msg):
 # @bot.register(Friend, (TEXT, SHARING))
 # def auto_reply_friend(msg):
 #     message = msg.text.lower().strip()
-#     if message in ('help', '帮助'):
+#     if any(word in message for word in ('help', '帮助')):
 #         msg.reply(group_help_text)
-#     if message in ('rules', 'rule', '群规'):
+#     if any(word in message for word in ('rules', 'rule', '群规')):
 #         msg.reply(group_rule_text.format(str(kick_max)))
-#     elif message in ('jobs', 'job', 'app', 'startup', '创业', '工作'):
+#     elif any(word in message for word in ('jobs', 'job', 'app', 'startup', '创业', '工作')):
 #         msg.reply(group_miniapp_text)
 #         msg.sender.send_image('assets/it_jobs_miniapp_barcode.jpeg')
 
