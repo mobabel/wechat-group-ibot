@@ -87,8 +87,11 @@ def process_group_members(group):
     group_id = group.ext_attr.group_id
 
     # not include region, gender, signature
-    # TODO this will change the member's puid ???
-    group.update_group(members_details=False)
+    try:
+        # TODO this will change the member's puid ???
+        group.update_group(members_details=False)
+    except BaseException:
+        pass
 
     # init file handler
     fp = codecs.open(get_path_custom('group_member') + '/%s_member_list.txt' % group_id, 'w+', 'utf-8')

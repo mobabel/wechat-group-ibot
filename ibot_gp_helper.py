@@ -4,6 +4,7 @@ from apscheduler.schedulers.blocking import BlockingScheduler
 from apscheduler.triggers.cron import CronTrigger
 
 # local python lib
+from wechat_const import *
 # import tulingreply
 from ibot_db import *
 from ibot_init import *
@@ -80,12 +81,15 @@ def start_schedule_for_analyzing():
 # read configuration
 debug = False
 day = time.strftime("%Y-%m-%d")
+kick_max = cf.getint('wechat', 'kick_max')
 
 # init database instance
 bot_db = BotDatabase.instance(db_config)
 
 group_1 = init_group(group_name_1, group_id_1)
-group_3 = init_group(group_name_3, group_id_3)
+
+
+# group_3 = init_group(group_name_3, group_id_3)
 
 
 @bot.register(group_1, except_self=False)
@@ -93,10 +97,34 @@ def reg_msg_for_group(msg):
     save_message(msg, group_id_1)
 
 
-@bot.register(group_3, except_self=False)
-def reg_msg_for_group(msg):
-    save_message(msg, group_id_3)
+# @bot.register(group_3, except_self=False)
+# def reg_msg_for_group(msg):
+#     save_message(msg, group_id_3)
 
+@bot.register(group_1)
+def auto_reply_assistant(msg):
+    # If is from group but not @ mentioned, ignore
+    if not (isinstance(msg.sender, Group) and not msg.is_at):
+        message = msg.text.lower().strip()
+        if message in ('help', '帮助'):
+            msg.reply(group_help_text)
+        if message in ('rules', 'rule', '群规'):
+            msg.reply(group_rule_text.format(str(kick_max)))
+        elif message in ('jobs', 'job', 'app', 'startup', '创业', '工作'):
+            msg.reply(group_miniapp_text)
+            group_1.send_image('assets/it_jobs_miniapp_barcode.jpeg')
+
+
+# @bot.register(Friend, (TEXT, SHARING))
+# def auto_reply_friend(msg):
+#     message = msg.text.lower().strip()
+#     if message in ('help', '帮助'):
+#         msg.reply(group_help_text)
+#     if message in ('rules', 'rule', '群规'):
+#         msg.reply(group_rule_text.format(str(kick_max)))
+#     elif message in ('jobs', 'job', 'app', 'startup', '创业', '工作'):
+#         msg.reply(group_miniapp_text)
+#         msg.sender.send_image('assets/it_jobs_miniapp_barcode.jpeg')
 
 # @bot.register(group_1)
 # def auto_reply(msg):
