@@ -197,6 +197,12 @@ def start_schedule_for_checking_member(group):
         pass
 
 
+def clean_html(raw_html):
+    clean_text = re.compile('<.*?>')
+    result = re.sub(clean_text, '', raw_html)
+    return result
+
+
 # read configuration
 debug = False
 notice_random = cf.getint('wechat', 'notice_random')
@@ -211,7 +217,8 @@ group_1 = init_group(group_name_1, group_id_1)
 @bot.register(group_1, NOTE)
 def welcome_for_group(msg):
     try:
-        new_member_name = re.search(r'邀请"(.+?)"|"(.+?)"通过', msg.text).group(1)
+        new_member_name = clean_html(msg.text)
+        new_member_name = re.search(r'邀请"(.+?)"|"(.+?)"通过', new_member_name).group(1)
     except AttributeError:
         print('welcome_for_group error: %s' % msg.text)
         return

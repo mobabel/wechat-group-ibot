@@ -29,6 +29,7 @@ def save_message(msg, group_id):
         # print(word.encode('utf-8'))
         message = msg.text
         # tulingreply.tuling_auto_reply(msg)
+        # print('aaaa: %s' % message)
 
     if msg.type == NOTE:
         message = msg.text
@@ -95,13 +96,14 @@ group_1 = init_group(group_name_1, group_id_1)
 @bot.register(group_1, except_self=False)
 def reg_msg_for_group(msg):
     save_message(msg, group_id_1)
+    auto_reply_assistant(msg)
 
 
 # @bot.register(group_3, except_self=False)
 # def reg_msg_for_group(msg):
-#     save_message(msg, group_id_3)
+#    save_message(msg, group_id_3)
 
-@bot.register(group_1)
+
 def auto_reply_assistant(msg):
     # If is from group but not @ mentioned, ignore
     if not (isinstance(msg.sender, Group) and not msg.is_at):
