@@ -109,3 +109,6 @@ venv.bak/
 
 wxpy.pkl
 wxpy_puid.pkl
+
+node_modules/
+package-lock.json
