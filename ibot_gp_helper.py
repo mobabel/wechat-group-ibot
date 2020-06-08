@@ -54,7 +54,8 @@ def save_message(msg, group_id):
     elif msg.type == MAP:
         message = msg.location
 
-    insert_chat_history(group_id, msg.type, wx_puid, gp_user_name, member_name, '', message)
+    if member_name != group_assistant_name:
+        insert_chat_history(group_id, msg.type, wx_puid, gp_user_name, member_name, '', message)
 
 
 def process_schedule(bot_db_, bot_, group_):
@@ -108,9 +109,9 @@ def auto_reply_assistant(msg):
     # If is from group but not @ mentioned, ignore
     if not (isinstance(msg.sender, Group) and not msg.is_at):
         message = msg.text.lower().strip()
-        message = message.replace('@IT群助手', '')
+        message = message.replace('@' + group_assistant_name, '')
         message = message.replace('@', '')
-        message = message.replace('IT群助手', '')
+        message = message.replace(group_assistant_name, '')
         message = message.replace(' ', '')
         if any(word in message for word in ('help', '帮助')):
             msg.reply(group_help_text)

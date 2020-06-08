@@ -60,3 +60,5 @@ group_miniapp_text = '''
 # But @someone in group to notice member is not possible via WeChat web API
 # It could have been blocked by WeChat
 space_after_chat_at = u'\u2005'
+
+group_assistant_name = 'IT群助手'
