@@ -219,6 +219,8 @@ def welcome_for_group(msg):
     try:
         new_member_name = clean_html(msg.text)
         new_member_name = re.search(r'邀请"(.+?)"|"(.+?)"通过', new_member_name).group(1)
+        if new_member_name == 'None':
+            new_member_name = re.search(r'邀请"(.+?)"|"(.+?)"通过', new_member_name).group(2)
     except AttributeError:
         print('welcome_for_group error: %s' % msg.text)
         return
